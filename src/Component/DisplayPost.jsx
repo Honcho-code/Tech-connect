@@ -14,6 +14,7 @@ import {
   addDoc,
 } from "firebase/firestore";
 import {
+  Badge,
   Bookmark,
   Delete,
   Edit,
@@ -122,7 +123,7 @@ const DisplayPost = () => {
                 <div className="flex items-center gap-3">
                   <img src="/Ellipse.png" alt="" />
                   <div className="">
-                    <p>{post.createdBy}</p>
+                {post.createdBy === "Clinton Rapheal" ? <div className="flex items-center gap-2"><p>{post.createdBy}</p> <Badge className="size-3 text-black"/> </div> : <p>{post.createdBy}</p>}
                     <p className="font-extralight text-xs">{timeAgo}</p>
                   </div>
                 </div>
