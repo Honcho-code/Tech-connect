@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Eye, EyeOff, LockKeyhole, Mail, UserRound } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { loginUser } from "../services/firebase/auth";
 import { auth } from "../../config/firebase";
 
 interface LoginProps{
@@ -18,12 +18,14 @@ const Login:React.FC<LoginProps> = ({
   setPassword,
 }) => {
   const [error, setError] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true)
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    await loginUser(email, password)
     setError("");
     navigate("/");  
   } catch (err) {
@@ -40,6 +42,8 @@ const Login:React.FC<LoginProps> = ({
     } else {
       setError("Login failed. Please try again later.");
     }
+  }finally{
+    setLoading(false)
   }
 };
     const [showPassword, setShowPassword] = useState(false);

@@ -3,6 +3,7 @@ import { Camera, Eye, EyeOff, LockKeyhole, Mail, UserRound } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../config/firebase";
+import { SignupUser } from "../services/firebase/auth";
 
 interface SognupProps{
   userName: string;
@@ -30,12 +31,7 @@ const Signupform = ({
   const handleSignup = async (e)=>{
     e.preventDefault();
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-
-        await updateProfile(auth.currentUser,{
-          displayName: userName,
-        })
-
+      await SignupUser(email, password, userName)
 
       setError("");
       navigate("/");  
