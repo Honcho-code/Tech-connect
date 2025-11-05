@@ -1,19 +1,22 @@
 import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { Bell, Bookmark, Home, LogOut, Plus, User } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { auth } from '../../config/firebase'
+import { useAuthStore } from '../store/authStore'
 
 const LeftSidebar = ({ postModal, setPostModal }) => {
     const navigate = useNavigate()
+    const {logout, error, loading, user} = useAuthStore()
+
     const handleLogout = async()=>{
-        try {
-            signOut(auth)
-            navigate("/")
-        } catch (error) {
-            console.error("Error signing user out", error)
-        }
+        await logout()
     }
+    useEffect(()=>{
+        if(!user){
+            navigate("/login")
+        }
+    },[user,navigate])
     const baseClass =
     "flex gap-3 text-white items-center py-3 rounded-lg lg:px-4 lg:py-3 hover:bg-[#7E1CAE] transition-all duration-300 border-2 border-[#9306D9] cursor-pointer";
   const activeClass = "bg-[#7E1CAE] border-white";

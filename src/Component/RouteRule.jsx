@@ -17,7 +17,7 @@ export function PublicRoute({children}){
     const navigate = useNavigate()
     onAuthStateChanged(auth, (user)=>{
         if(user){
-            navigate("/home")
+            navigate("/")
         }
     })
     return children;
