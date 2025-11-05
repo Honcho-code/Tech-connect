@@ -16,6 +16,7 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import {
+  Badge,
   Bookmark,
   ChevronLeft,
   Delete,
@@ -88,7 +89,8 @@ const PostDetail = () => {
             <div className="flex items-center gap-3">
               <img src="/Ellipse.png" alt="" />
               <div className="">
-                <p>{post.createdBy}</p>
+                {post.createdBy === "Clinton Rapheal" ? <div className="flex items-center gap-2"><p>{post.createdBy}</p> <Badge className="size-3 text-black"/> </div> : <p>{post.createdBy}</p>}
+                
                 <p className="font-extralight text-xs">{
                     formatDistanceToNow(post.createdAt?.toDate ? post.createdAt.toDate() : new Date())
                     }</p>
