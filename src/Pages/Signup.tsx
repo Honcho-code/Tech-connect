@@ -4,6 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../config/firebase";
 
+interface SognupProps{
+  userName: string;
+  setUserName: React.Dispatch<React.SetStateAction<string>>;
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+}
+
 const Signupform = ({
   userName,
   setUserName,
@@ -14,8 +23,8 @@ const Signupform = ({
 
 }) => {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
 
   const handleSignup = async (e)=>{

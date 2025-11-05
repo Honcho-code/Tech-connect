@@ -17,8 +17,8 @@ const Login:React.FC<LoginProps> = ({
   password,
   setPassword,
 }) => {
+  const [error, setError] = useState<string>("")
   const navigate = useNavigate();
-  const [error, setError] = useState("")
 
   const handleLogin = async (e) => {
     e.preventDefault();
