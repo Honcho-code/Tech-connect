@@ -1,11 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Eye, EyeOff, LockKeyhole, Mail, UserRound } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
 
+interface LoginProps{
+  email: string;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
+  password: string;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+}
 
-const Login = ({
+const Login:React.FC<LoginProps> = ({
   email,
   setEmail,
   password,
